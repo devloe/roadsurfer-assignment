@@ -87,6 +87,7 @@ src/
 
 - The focus of this assignment was to deliver a **clean, maintainable, and testable implementation** rather than over-engineering with unnecessary tools.
 - The design is minimal but functional, with clear separation between business logic, infrastructure, and UI.
+- Please be aware that the default calendar week is June 2021 since most of the bookings returned by the API are from that year.
 
 ### Next Steps / Potential Improvements
 - Add a router to support direct linking to booking details and improve navigation.
