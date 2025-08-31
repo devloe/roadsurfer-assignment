@@ -29,6 +29,15 @@ npm run test
 
 ## ⚙️ Technical Decisions
 
+### Tech Stack
+
+- React 19
+- Vite
+- TypeScript
+- TailwindCSS
+- Vitest + Testing Library
+- MSW (Mock Service Worker)
+
 ### Dependencies
 - The project does **not rely on any external dependencies** (other than dev dependencies for testing and tooling).
 
