@@ -55,7 +55,7 @@ describe("Autocomplete", () => {
     fireEvent.click(screen.getByText("Apple"));
 
     expect(onChange).toHaveBeenCalledWith("apple");
-    expect(screen.queryByRole("listbox")).toBeNull(); // dropdown closed
+    expect(screen.queryByRole("listbox")).toBeNull();
   });
 
   it("closes dropdown on Escape", async () => {

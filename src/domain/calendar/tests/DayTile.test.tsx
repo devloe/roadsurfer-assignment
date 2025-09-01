@@ -100,7 +100,7 @@ describe("DayTile", () => {
 
     const header = screen.getByText("Monday");
     const tile = header.parentElement?.parentElement;
-    if (!tile) throw new Error("Tile element not found"); // ⚡ aseguramos que no sea null
+    if (!tile) throw new Error("Tile element not found");
 
     // Drag enter
     fireEvent.dragEnter(tile);

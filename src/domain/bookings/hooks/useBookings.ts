@@ -57,7 +57,7 @@ export function useBookings(
             originalStart.getSeconds(),
             originalStart.getMilliseconds(),
           );
-          newEnd.setTime(originalEnd.getTime()); // end sigue igual
+          newEnd.setTime(originalEnd.getTime());
         } else if (role === "return") {
           newEnd.setHours(
             originalEnd.getHours(),

@@ -6,7 +6,7 @@ type BookingDetailsScreenProps = {
   bookingId: string;
   stationId: string;
   onClose: () => void;
-  getStationById: (id: string) => Station | undefined; // añadimos la prop
+  getStationById: (id: string) => Station | undefined;
 };
 
 export function BookingDetailsScreen({

@@ -18,7 +18,6 @@ const mockStation: Station = {
   bookings: [],
 };
 
-// Mock de getStationById
 const getStationById = vi.fn((id: string) =>
   id === mockStation.id ? mockStation : undefined,
 );

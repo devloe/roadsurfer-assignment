@@ -16,7 +16,7 @@ describe("Booking Flow (integration)", () => {
     expect(await screen.findByText("Berlin")).toBeInTheDocument();
     expect(await screen.findByText(/Campervans Rental/i)).toBeInTheDocument();
 
-    const booking = await screen.findAllByTestId("booking-item"); // viene del handler de bookings
+    const booking = await screen.findAllByTestId("booking-item");
     fireEvent.click(booking[0]);
 
     expect(await screen.findByText("Booking Details")).toBeInTheDocument();

@@ -7,7 +7,7 @@ export type AutocompleteOption<TValue = string> = {
 };
 
 type AutocompleteProps<TValue = string> = {
-  id?: string; // ✅ nuevo
+  id?: string;
   value?: TValue | null;
   query?: string;
   placeholder?: string;
@@ -20,7 +20,7 @@ type AutocompleteProps<TValue = string> = {
 };
 
 export function Autocomplete<TValue = string>({
-  id, // ✅ nuevo
+  id,
   query: externalQuery,
   placeholder = "Search…",
   minChars = 1,
@@ -130,7 +130,7 @@ export function Autocomplete<TValue = string>({
   return (
     <div ref={containerRef} style={{ position: "relative", textAlign: "left" }}>
       <input
-        id={id} // ✅ ahora se aplica al input
+        id={id}
         type="text"
         value={query}
         placeholder={placeholder}
