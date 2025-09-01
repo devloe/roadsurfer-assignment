@@ -25,7 +25,7 @@ describe("StationSelector", () => {
     );
 
     expect(
-      screen.getByText("Select Station to view calendar:"),
+      screen.getByLabelText("Select a station to view calendar"),
     ).toBeInTheDocument();
     expect(
       screen.getByPlaceholderText("Search for a station..."),

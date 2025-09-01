@@ -7,6 +7,7 @@ export type AutocompleteOption<TValue = string> = {
 };
 
 type AutocompleteProps<TValue = string> = {
+  id?: string; // ✅ nuevo
   value?: TValue | null;
   query?: string;
   placeholder?: string;
@@ -19,7 +20,7 @@ type AutocompleteProps<TValue = string> = {
 };
 
 export function Autocomplete<TValue = string>({
-  //value: externalValue = null,
+  id, // ✅ nuevo
   query: externalQuery,
   placeholder = "Search…",
   minChars = 1,
@@ -93,7 +94,6 @@ export function Autocomplete<TValue = string>({
 
   const handleSelect = (opt: AutocompleteOption<TValue>) => {
     onChange?.(opt.value);
-    // Clear input after selection and fully close the dropdown
     if (onQueryChange) onQueryChange("");
     else setInternalQuery("");
     setIsOpen(false);
@@ -130,6 +130,7 @@ export function Autocomplete<TValue = string>({
   return (
     <div ref={containerRef} style={{ position: "relative", textAlign: "left" }}>
       <input
+        id={id} // ✅ ahora se aplica al input
         type="text"
         value={query}
         placeholder={placeholder}

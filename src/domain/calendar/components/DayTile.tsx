@@ -23,7 +23,10 @@ export function DayTile({
   const [isDragOver, setIsDragOver] = useState(false);
 
   return (
-    <div
+    <section
+      role="list"
+      aria-label={`${day.dayName}, ${day.dayNumber}`}
+      aria-dropeffect={isDragOver ? "move" : undefined}
       className={`rounded-lg border p-2 h-44 overflow-y-auto transition-colors ${
         isDragOver ? "border-blue-500 bg-blue-50" : "border-gray-200"
       }`}
@@ -32,7 +35,6 @@ export function DayTile({
         setIsDragOver(true);
       }}
       onDragOver={(e) => {
-        // Allow dropping on the day tile
         e.preventDefault();
         setIsDragOver(true);
       }}
@@ -57,21 +59,22 @@ export function DayTile({
         setIsDragOver(false);
       }}
     >
-      <div className="mb-2 flex items-baseline justify-between">
-        <span className="text-sm text-gray-500">{day.dayName}</span>
-        <span className="text-lg font-semibold">{day.dayNumber}</span>
-      </div>
+      <header className="mb-2 flex items-baseline justify-between">
+        <h3 className="text-sm text-gray-500">{day.dayName}</h3>
+        <p className="text-lg font-semibold">{day.dayNumber}</p>
+      </header>
 
-      <div className="space-y-2">
+      <ul className="space-y-2">
         {bookings.map((booking) => (
-          <BookingItem
-            key={booking.id}
-            booking={booking}
-            dayDate={day.date}
-            onBookingClick={onBookingClick}
-          />
+          <li key={booking.id} role="listitem">
+            <BookingItem
+              booking={booking}
+              dayDate={day.date}
+              onBookingClick={onBookingClick}
+            />
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </section>
   );
 }

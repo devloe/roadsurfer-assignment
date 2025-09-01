@@ -19,7 +19,8 @@ describe("WeekNavigation", () => {
       />,
     );
 
-    expect(screen.getByText("August 2025 - Week of Aug 1")).toBeInTheDocument();
+    const heading = screen.getByRole("heading", { level: 2 });
+    expect(heading).toHaveTextContent("August 2025 – Week of Aug 1");
   });
 
   it("renders all buttons", () => {

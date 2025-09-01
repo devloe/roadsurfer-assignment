@@ -18,8 +18,7 @@ export function StationSelector({
   const fetchStations = async (
     query: string,
   ): Promise<AutocompleteOption<Station>[]> => {
-    const filtered = searchStations(query);
-    return filtered.map((station) => ({
+    return searchStations(query).map((station) => ({
       label: station.name,
       value: station,
     }));
@@ -27,15 +26,20 @@ export function StationSelector({
 
   return (
     <div className="mb-6">
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Select Station to view calendar:
+      <label
+        htmlFor="station-autocomplete"
+        className="block text-sm font-medium text-gray-700 mb-2"
+      >
+        Select a station to view calendar
       </label>
       <Autocomplete
+        id="station-autocomplete"
         placeholder="Search for a station..."
         value={selectedStation}
         onChange={onStationChange}
         fetchOptions={fetchStations}
         debounceMs={300}
+        data-testid="station-selector"
       />
     </div>
   );
