@@ -1,15 +1,19 @@
-import type { Booking } from "../../../types/api";
+import type { Booking, Station } from "../../../types/api";
 
 type BookingDetailsProps = {
   data: Booking;
+  getStationById: (id: string) => Station | undefined;
 };
 
-export function BookingDetails({ data }: BookingDetailsProps) {
+export function BookingDetails({ data, getStationById }: BookingDetailsProps) {
   const start = new Date(data.startDate);
   const end = new Date(data.endDate);
   const ms = Math.max(0, end.getTime() - start.getTime());
   const days = Math.max(0, Math.ceil(ms / 86_400_000));
   const durationText = `${days} day${days === 1 ? "" : "s"}`;
+
+  const stationName =
+    getStationById(data.pickupReturnStationId)?.name ?? "Unknown";
 
   return (
     <section
@@ -44,6 +48,11 @@ export function BookingDetails({ data }: BookingDetailsProps) {
         <div className="flex justify-between py-2">
           <dt className="font-semibold text-gray-700">Duration</dt>
           <dd className="text-gray-900">{durationText}</dd>
+        </div>
+
+        <div className="flex justify-between py-2">
+          <dt className="font-semibold text-gray-700">Pickup-Return Station</dt>
+          <dd className="text-gray-900">{stationName}</dd>
         </div>
       </dl>
     </section>

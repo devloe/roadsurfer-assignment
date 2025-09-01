@@ -12,7 +12,7 @@ import type { Station } from "./types/api";
 import { useCalendar } from "./domain";
 
 function App() {
-  const { searchStations, stations } = useStations();
+  const { searchStations, stations, getStationById } = useStations();
   const { weekDays, weekHeader, goToPreviousWeek, goToNextWeek, goToToday } =
     useCalendar();
   const [selectedStation, setSelectedStation] = useState<Station | null>(null);
@@ -28,6 +28,7 @@ function App() {
     <>
       {selectedBooking && selectedStation && (
         <BookingDetailsScreen
+          getStationById={getStationById}
           bookingId={selectedBooking.id}
           stationId={selectedStation.id}
           onClose={closeBookingDetails}

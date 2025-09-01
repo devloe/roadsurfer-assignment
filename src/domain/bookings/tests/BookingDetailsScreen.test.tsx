@@ -1,7 +1,7 @@
 import { describe, it, vi, beforeEach, type MockInstance } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import * as bookingHooks from "../hooks/useBookingDetails";
-import type { Booking } from "../../../types/api";
+import type { Booking, Station } from "../../../types/api";
 import { BookingDetailsScreen } from "../components/BookingDetailsScreen";
 
 describe("BookingDetailsScreen", () => {
@@ -13,7 +13,16 @@ describe("BookingDetailsScreen", () => {
     pickupReturnStationId: "station-1",
   };
 
+  const mockStation: Station = {
+    id: "station-1",
+    name: "Central Station",
+    bookings: [],
+  };
+
   const onClose = vi.fn();
+  const getStationById = vi.fn((id: string) =>
+    id === mockStation.id ? mockStation : undefined,
+  );
 
   let spy: MockInstance;
 
@@ -30,7 +39,12 @@ describe("BookingDetailsScreen", () => {
     });
 
     render(
-      <BookingDetailsScreen bookingId="1" stationId="s1" onClose={onClose} />,
+      <BookingDetailsScreen
+        bookingId="1"
+        stationId="s1"
+        onClose={onClose}
+        getStationById={getStationById}
+      />,
     );
 
     expect(screen.getByText(/loading booking details/i)).toBeInTheDocument();
@@ -44,7 +58,12 @@ describe("BookingDetailsScreen", () => {
     });
 
     render(
-      <BookingDetailsScreen bookingId="1" stationId="s1" onClose={onClose} />,
+      <BookingDetailsScreen
+        bookingId="1"
+        stationId="s1"
+        onClose={onClose}
+        getStationById={getStationById}
+      />,
     );
 
     expect(screen.getByText(/failed to fetch/i)).toBeInTheDocument();
@@ -58,7 +77,12 @@ describe("BookingDetailsScreen", () => {
     });
 
     render(
-      <BookingDetailsScreen bookingId="1" stationId="s1" onClose={onClose} />,
+      <BookingDetailsScreen
+        bookingId="1"
+        stationId="s1"
+        onClose={onClose}
+        getStationById={getStationById}
+      />,
     );
 
     expect(
@@ -74,10 +98,17 @@ describe("BookingDetailsScreen", () => {
     });
 
     render(
-      <BookingDetailsScreen bookingId="1" stationId="s1" onClose={onClose} />,
+      <BookingDetailsScreen
+        bookingId="1"
+        stationId="s1"
+        onClose={onClose}
+        getStationById={getStationById}
+      />,
     );
 
     expect(screen.getByText("Alice")).toBeInTheDocument();
+    expect(screen.getByText("Central Station")).toBeInTheDocument();
+    expect(getStationById).toHaveBeenCalledWith("station-1");
   });
 
   it("calls onClose when the back button is clicked", () => {
@@ -88,11 +119,15 @@ describe("BookingDetailsScreen", () => {
     });
 
     render(
-      <BookingDetailsScreen bookingId="1" stationId="s1" onClose={onClose} />,
+      <BookingDetailsScreen
+        bookingId="1"
+        stationId="s1"
+        onClose={onClose}
+        getStationById={getStationById}
+      />,
     );
 
     fireEvent.click(screen.getByTestId("back-button"));
-
     expect(onClose).toHaveBeenCalledOnce();
   });
 });

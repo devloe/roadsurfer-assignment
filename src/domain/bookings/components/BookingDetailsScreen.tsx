@@ -1,17 +1,20 @@
 import { BookingDetails } from "./BookingDetails";
 import { useBookingDetails } from "../hooks/useBookingDetails";
+import type { Station } from "../../../types/api";
 
-type BookingDetailsContainerProps = {
+type BookingDetailsScreenProps = {
   bookingId: string;
   stationId: string;
   onClose: () => void;
+  getStationById: (id: string) => Station | undefined; // añadimos la prop
 };
 
 export function BookingDetailsScreen({
   bookingId,
   stationId,
   onClose,
-}: BookingDetailsContainerProps) {
+  getStationById,
+}: BookingDetailsScreenProps) {
   const {
     booking: data,
     loading,
@@ -51,7 +54,8 @@ export function BookingDetailsScreen({
         >
           ← Back
         </button>
-        <BookingDetails data={data} />
+
+        <BookingDetails data={data} getStationById={getStationById} />
       </div>
     </main>
   );
